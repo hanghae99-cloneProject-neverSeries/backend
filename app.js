@@ -3,10 +3,12 @@ require('dotenv').config();
 const logger = require('morgan');
 const { sequelize } = require('./models');
 const testRouter = require("./routes/test");
+const signupPage = require('./routes/signup');
+const loginPage = require('./routes/login');
 
 const app = express();
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log('MYSQL 연결 성공');
   })
@@ -19,7 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/test', testRouter);
+app.use('/signup', signupPage);
+app.use('/login', loginPage);
 
-app.listen(process.env.PORT, () => {
-  console.log(`http://localhost:${process.env.PORT}/api`);
+app.listen(3000, () => {
+  console.log(`http://localhost:${process.env.PORT}`);
 })
