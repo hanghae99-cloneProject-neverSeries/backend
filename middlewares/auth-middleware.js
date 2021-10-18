@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
 
     if (token) {
-      const {userId} = jwt.verify(token, 'hi');
+      const {userId} = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findOne({where: {userId}});
       res.locals.user = user.userId;
       next();
