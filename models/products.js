@@ -54,7 +54,7 @@ module.exports = class Product extends Sequelize.Model {
     })
 
     db.Product.belongsTo(db.User, {
-      foreignKey: 'productId',
+      foreignKey: 'userId',
       sourceKey: 'id',
     })
   }

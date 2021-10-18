@@ -1,10 +1,12 @@
 const express = require('express');
-const app = express();
 require('dotenv').config();
+const logger = require('morgan');
+const { sequelize } = require('./models');
+const testRouter = require("./routes/test");
 
-const {sequelize} = require('./models');
+const app = express();
 
-sequelize.sync({force: true})
+sequelize.sync({ force: true })
   .then(() => {
     console.log('MYSQL 연결 성공');
   })
@@ -12,6 +14,12 @@ sequelize.sync({force: true})
     console.error(err);
   });
 
-app.listen(process.env.PORT, ()=>{
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use('/test', testRouter);
+
+app.listen(process.env.PORT, () => {
   console.log(`http://localhost:${process.env.PORT}/api`);
 })
