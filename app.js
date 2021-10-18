@@ -3,6 +3,7 @@ require('dotenv').config();
 const logger = require('morgan');
 const { sequelize } = require('./models');
 const testRouter = require("./routes/test");
+const novelRouter = require("./routes/novel");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/test', testRouter);
+app.use('/novel', novelRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:${process.env.PORT}/api`);

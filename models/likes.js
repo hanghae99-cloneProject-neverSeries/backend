@@ -37,6 +37,7 @@ module.exports = class Like extends Sequelize.Model {
     db.Like.belongsTo(db.Product, {
       foreignKey: 'productId',
       targetKey: 'id',
+      onDelete: 'CASCADE',
     })
   }
 };
