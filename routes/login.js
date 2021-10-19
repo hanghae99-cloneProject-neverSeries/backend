@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 router.route('/')
-  .post(async (req, res) => {
+  .post(async (req, res, next) => {
     try {
       const {userId, pw} = req.body;
       const user = await User.findOne({where: {userId}});
@@ -21,7 +21,8 @@ router.route('/')
         res.send('존재하지 않는 아이디입니다.');
       }
     } catch (err) {
-      res.send(`${req.url}, ${req.method}, ${req.error}`);
+      console.log(`${req.url}, ${req.method}, ${req.error}`);
+      next(err)
     }
   });
 
