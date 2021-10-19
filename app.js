@@ -6,6 +6,7 @@ const {swaggerUi, specs} = require('./swagger/swagger');
 const testRouter = require("./routes/test");
 const signupPage = require('./routes/signup');
 const loginPage = require('./routes/login');
+const errorHandler = require('./middlewares/error-middleware')
 
 
 const app = express();
@@ -26,6 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/test', testRouter);
 app.use('/signup', signupPage);
 app.use('/login', loginPage);
+
+// 에러 핸들러 미들웨어 --> 김정호: app.js 추가된 부분
+app.use(errorHandler.routerError);
+app.use(errorHandler.errorHandler);
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:${process.env.PORT}/api`);
