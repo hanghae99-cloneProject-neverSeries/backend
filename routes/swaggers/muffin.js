@@ -42,3 +42,39 @@
  *              example:
  *                msg: 실패 메세지
  */
+
+/**
+ * @swagger
+ * /buy:
+ *  put:
+ *    summary: 특정 도서 구매 API
+ *    description: 머핀을 사용하여 도서를 구매하는 API
+ *    tags:
+ *      - 구매
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required: true
+ *            properties:
+ *              productId:
+ *                type: integer
+ *              round:
+ *                type: integer
+ *            example:
+ *              productId: 1
+ *              round: 12
+ *    responses:
+ *      200:
+ *        description: 정상적인 요청, 응답
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                msg:
+ *                  type: string
+ *              example:
+ *                msg: 구매 완료
+ */
