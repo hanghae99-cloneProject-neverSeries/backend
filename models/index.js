@@ -1,16 +1,21 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
-const User = require('../models/users');
-const Product = require('../models/products');
-const Round = require('../models/rounds');
-const Like = require('../models/likes');
-const Review = require('../models/reviews');
+const User = require("../models/users");
+const Product = require("../models/products");
+const Round = require("../models/rounds");
+const Like = require("../models/likes");
+const Review = require("../models/reviews");
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
 db.sequelize = sequelize;
 
 db.User = User;

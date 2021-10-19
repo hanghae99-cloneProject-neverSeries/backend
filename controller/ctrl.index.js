@@ -27,4 +27,9 @@ const getProcess = {
     try {
     } catch (err) {}
   },
+
+  putBuyProduct: async (req, res) => {
+    try {
+    } catch (err) {}
+  },
 };

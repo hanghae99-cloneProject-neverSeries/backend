@@ -19,7 +19,6 @@ module.exports = class Product extends Sequelize.Model {
           required: true,
           allowNull: false,
         },
-
         imgURL: {
           type: Sequelize.STRING,
           required: true,
@@ -59,7 +58,7 @@ module.exports = class Product extends Sequelize.Model {
 
     // Product 와 User --> 1:N
     db.Product.belongsTo(db.User, {
-      foreignKey: "productId",
+      foreignKey: "userId",
       sourceKey: "id",
     });
   }

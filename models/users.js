@@ -59,5 +59,11 @@ module.exports = class User extends Sequelize.Model {
       foreignKey: "userId",
       sourceKey: "id",
     });
+
+    // User 와 Round --> 1:N
+    db.User.hasMany(db.Round, {
+      foreignKey: "userId",
+      sourceKey: "id",
+    });
   }
 };

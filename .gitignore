@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+#sequelize 비밀번호 분리를 위해서 config 폴더도 제외했습니다.
+config/

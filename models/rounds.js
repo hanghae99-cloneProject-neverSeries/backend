@@ -5,14 +5,9 @@ module.exports = class Round extends Sequelize.Model {
     return super.init(
       {
         round: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: false,
           required: true,
-        },
-        roundState: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false,
-          defaultValue: false,
         },
       },
       {
@@ -30,6 +25,10 @@ module.exports = class Round extends Sequelize.Model {
   static associate(db) {
     db.Round.belongsTo(db.Product, {
       foreignKey: "productId",
+      targetKey: "id",
+    });
+    db.Round.belongsTo(db.User, {
+      foreignKey: "userId",
       targetKey: "id",
     });
   }
