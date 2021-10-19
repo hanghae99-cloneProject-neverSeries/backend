@@ -1,61 +1,66 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
 module.exports = class Product extends Sequelize.Model {
   static init(sequelize) {
-    return super.init({
-      title: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
-      },
-      bookInfo: {
-        type: Sequelize.STRING,
-        required: true,
-        allowNull: false,
-      },
+    return super.init(
+      {
+        title: {
+          type: Sequelize.STRING,
+          required: true,
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING,
+          required: true,
+          allowNull: false,
+        },
+        bookInfo: {
+          type: Sequelize.STRING,
+          required: true,
+          allowNull: false,
+        },
 
-      like: {
-        type: Sequelize.INTEGER,
-        required: true,
-        allowNull: false,
+        imgURL: {
+          type: Sequelize.STRING,
+          required: true,
+          allowNull: false,
+        },
       },
-    }, {
-      sequelize,
-      timestamps: false,
-      underscored: false,
-      modelName: 'Product',
-      tableName: 'products',
-      paranoid: false,
-      charset: 'utf8',
-      collate: 'utf8_general_ci',
-    });
+      {
+        sequelize,
+        timestamps: false,
+        underscored: false,
+        modelName: "Product",
+        tableName: "products",
+        paranoid: false,
+        charset: "utf8",
+        collate: "utf8_general_ci",
+      }
+    );
   }
   static associate(db) {
     // Product 와 Like --> 1:N
     db.Product.hasMany(db.Like, {
-      foreignKey: 'productId',
-      sourceKey: 'id',
-    })
+      foreignKey: "productId",
+      sourceKey: "id",
+    });
 
     // Product 와 Round --> 1:N
     db.Product.hasMany(db.Round, {
-      foreignKey: 'productId',
-      sourceKey: 'id',
-    })
+      foreignKey: "productId",
+      sourceKey: "id",
+    });
 
+    // Product 와 Review --> 1:N
     db.Product.hasMany(db.Review, {
-      foreignKey: 'productId',
-      sourceKey: 'id'
-    })
+      foreignKey: "productId",
+      sourceKey: "id",
+    });
 
+    // Product 와 User --> 1:N
     db.Product.belongsTo(db.User, {
-      foreignKey: 'productId',
-      sourceKey: 'id',
-    })
+      foreignKey: "productId",
+      sourceKey: "id",
+    });
   }
 };
