@@ -11,6 +11,7 @@ const errorHandler = require('./middlewares/error-middleware')
 
 
 const novelRouter = require("./routes/novel");
+const reviewsRouter = require("./routes/reviews");
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(errorHandler.routerError);
 app.use(errorHandler.errorHandler);
 
 app.use('/novel', novelRouter);
+app.use('/reviews', reviewsRouter);
 
 
 app.listen(process.env.PORT, () => {
