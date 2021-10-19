@@ -3,11 +3,15 @@ const Sequelize = require('sequelize');
 module.exports = class Review extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      // useId: {
+      // user_id: {
       //   type: Sequelize.INTEGER,
       //   allowNull: false,
       //   required: true,
       // },
+      nickname: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       review: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -25,7 +29,7 @@ module.exports = class Review extends Sequelize.Model {
   }
   static associate(db) {
     db.Review.belongsTo(db.User, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       targetKey: 'id',
     })
 

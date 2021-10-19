@@ -87,7 +87,7 @@
  *                type: string
  *                required: true
  *              round:
- *                type: string
+ *                type: integer
  *                required: true
  *              imgURL:
  *                type: string

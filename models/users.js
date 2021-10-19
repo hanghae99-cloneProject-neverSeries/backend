@@ -42,17 +42,17 @@ module.exports = class User extends Sequelize.Model {
   static associate(db) {
     // User 와 Review 관계 --> 1:N
     db.User.hasMany(db.Review, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       sourceKey: 'id',
     })
     // User 와 Like --> 1:N
     db.User.hasMany(db.Like, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       sourceKey: 'id',
     })
 
     db.User.hasMany(db.Product, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       sourceKey: 'id',
     })
 

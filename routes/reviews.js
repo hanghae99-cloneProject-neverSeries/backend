@@ -8,12 +8,9 @@ const {
   removeReview
 } = require('./controller/reviews')
 
-// 댓글 작성
-// 댓글 수정
-// 댓글 삭제
 router.route('/:productId')
-  .post(createReview)
-  .put(updateReview)
-  .delete(removeReview);
+  .post(createReview)// 댓글 작성
+  .put(updateReview)// 댓글 수정
+  .delete(removeReview);// 댓글 삭제
 
 module.exports = router;

@@ -2,13 +2,13 @@ const express = require('express');
 require('dotenv').config();
 const logger = require('morgan');
 const { sequelize } = require('./models');
-const {swaggerUi, specs} = require('./swagger/swagger');
+const { swaggerUi, specs } = require('./swagger/swagger');
 const testRouter = require("./routes/test");
 
 const signupPage = require('./routes/signup');
 const loginPage = require('./routes/login');
 const errorHandler = require('./middlewares/error-middleware')
-
+const authMiddleware = require('./middlewares/auth-middleware')
 
 const novelRouter = require("./routes/novel");
 const reviewsRouter = require("./routes/reviews");
@@ -33,13 +33,13 @@ app.use('/test', testRouter);
 
 app.use('/signup', signupPage);
 app.use('/login', loginPage);
+app.use('/novel', authMiddleware, novelRouter);
+app.use('/reviews', authMiddleware, reviewsRouter);
 
 // 에러 핸들러 미들웨어 --> 김정호: app.js 추가된 부분
 app.use(errorHandler.routerError);
 app.use(errorHandler.errorHandler);
 
-app.use('/novel', novelRouter);
-app.use('/reviews', reviewsRouter);
 
 
 app.listen(process.env.PORT, () => {
