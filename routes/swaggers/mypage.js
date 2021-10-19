@@ -28,15 +28,15 @@
  *                      round:
  *                        type: integer
  *                      like:
- *                        type: integer
+ *                        type: array
  *                      userId:
  *                        type: integer
  *                      imgURL:
  *                        type: string
  *              example:
  *                products: [
- *                  {title: 화산 귀환, description: 13대 화산제자 청명, bookInfo: 출판내용, round: 1, like: 1, userID: 1, imgURL: 이미지 사진},
- *                  {title: 마도전생기, description: 마도가 전생, bookInfo: 출판내용, round: 1, like: 1, userID: 1, imgURL: 이미지 사진}
+ *                  {title: 화산 귀환, description: 13대 화산제자 청명, bookInfo: 출판내용, round: 1, like: [], userID: 1, imgURL: 이미지 사진},
+ *                  {title: 마도전생기, description: 마도가 전생, bookInfo: 출판내용, round: 1, like: [], userID: 1, imgURL: 이미지 사진}
  *                ]
  */
 

@@ -6,10 +6,10 @@ const createReview = async (req, res) => {
   try {
     console.log(req.params);
     console.log(req.body);
-    console.log(req.locals);
+    console.log(res.locals);
     const { productId } = req.params
     const { review, createdAt, } = req.body;
-    const { user_id, nickname } = req.locals;
+    const { user_id, nickname } = res.locals;
     //미들웨어에서 id와 username을 같이 넘겨줄 수 있는지 알아보아야 함
     //만약 같이 넘겨줄수 없다면 users db에서 직접 검색해서 username 사용
     // const tmpUserId = 12;
@@ -35,7 +35,7 @@ const updateReview = async (req, res) => {
     console.log(req.body);
     const { productId } = req.params
     const { review, reviewsId, } = req.body;
-    const { user_id } = req.locals;
+    const { user_id } = res.locals;
     //미들웨어에서 id와 username을 같이 넘겨줄 수 있는지 알아보아야 함
     //만약 같이 넘겨줄수 없다면 users db에서 직접 검색해서 username 사용
     // const tmpUserId = 12;
@@ -64,10 +64,10 @@ const removeReview = async (req, res) => {
   try {
     console.log(req.params);
     console.log(req.body);
-    console.log(req.locals);
+    console.log(res.locals);
     const { productId } = req.params
     const { reviewsId } = req.body;
-    const { user_id } = req.locals;
+    const { user_id } = res.locals;
 
     //미들웨어에서 id와 username을 같이 넘겨줄 수 있는지 알아보아야 함
     // const tmpUserId = 12;

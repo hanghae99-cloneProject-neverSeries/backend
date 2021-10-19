@@ -27,7 +27,7 @@ sequelize.sync({ force: false })
 app.use('/api', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/test', testRouter);
 

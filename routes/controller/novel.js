@@ -35,6 +35,7 @@ const getProduct = async (req, res) => {
 //product 추가(임시 테스트 데이터 추가용)
 const createProduct = async (req, res) => {
   try {
+    console.log(1);
     console.log(req.body);
     const { title, description, bookInfo, round, imgURL } = req.body;
 
@@ -78,9 +79,9 @@ const createProduct = async (req, res) => {
 const handleLike = async (req, res) => {
   try {
     console.log(req.body);
-    console.log(req.locals);
+    console.log(res.locals);
     const { productId, like } = req.body;
-    const { user_id } = req.locals;
+    const { user_id } = res.locals;
     // const userIdTmp = 12;
     //포스트맨에서 req.body의 like가 
     //'true', 'false' 문자열로 들어왔어서 == 으로 했는데 나중에 변경

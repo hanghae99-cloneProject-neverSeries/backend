@@ -4,6 +4,7 @@ const {
   createProduct,
   handleLike,
 } = require('./controller/novel')
+const authMiddleware = require('../middlewares/auth-middleware')
 
 const router = express.Router();
 
