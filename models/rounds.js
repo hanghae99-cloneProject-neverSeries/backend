@@ -23,6 +23,7 @@ module.exports = class Round extends Sequelize.Model {
     db.Round.belongsTo(db.Product, {
       foreignKey: 'productId',
       targetKey: 'id',
+      onDelete: 'CASCADE',
     })
   }
 };

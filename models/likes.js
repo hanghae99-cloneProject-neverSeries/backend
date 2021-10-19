@@ -12,11 +12,6 @@ module.exports = class Like extends Sequelize.Model {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
     }, {
       sequelize,
       timestamps: false,
@@ -37,6 +32,7 @@ module.exports = class Like extends Sequelize.Model {
     db.Like.belongsTo(db.Product, {
       foreignKey: 'productId',
       targetKey: 'id',
+      onDelete: 'CASCADE',
     })
   }
 };
