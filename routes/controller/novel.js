@@ -78,13 +78,16 @@ const createProduct = async (req, res) => {
 const handleLike = async (req, res) => {
   try {
     console.log(req.body);
+    console.log(req.locals);
     const { productId, like } = req.body;
-    const userIdTmp = 12;
+    const { user_id } = req.locals;
+    // const userIdTmp = 12;
     //포스트맨에서 req.body의 like가 
     //'true', 'false' 문자열로 들어왔어서 == 으로 했는데 나중에 변경
-    if (like == true) {//좋아요가 true인 상태에서는 추가
+
+    if (like == 'true') {//좋아요가 true인 상태에서는 추가
       const likes = await Likes.create({
-        userId: userIdTmp,
+        user_id: user_id,
         productId: productId,
       })
       console.log(likes);
@@ -92,7 +95,7 @@ const handleLike = async (req, res) => {
     else {//좋아요가 false인 상태에서는 삭제
       await Likes.destroy({
         where: {
-          userId: userIdTmp,
+          user_id: user_id,
           productId: productId
         }
       })
