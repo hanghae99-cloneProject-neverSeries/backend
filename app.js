@@ -4,7 +4,6 @@ const logger = require('morgan');
 const { sequelize } = require('./models');
 const testRouter = require("./routes/test");
 const novelRouter = require("./routes/novel");
-const reviewsRouter = require("./routes/reviews");
 
 const app = express();
 
@@ -22,7 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/test', testRouter);
 app.use('/novel', novelRouter);
-app.use('/reviews', reviewsRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:${process.env.PORT}/api`);
