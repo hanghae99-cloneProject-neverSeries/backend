@@ -18,12 +18,11 @@ module.exports = class Product extends Sequelize.Model {
         required: true,
         allowNull: false,
       },
-
-      like: {
-        type: Sequelize.INTEGER,
+      imgURL: {
+        type: Sequelize.STRING,
         required: true,
         allowNull: false,
-      },
+      }
     }, {
       sequelize,
       timestamps: false,
