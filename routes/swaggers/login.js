@@ -19,8 +19,8 @@
  *                type: string
  *                required: true
  *            example:
- *              userId: test
- *              pw: "1234"
+ *              userId: this_is_test
+ *              pw: "thisTest123!"
  *    responses:
  *      200:
  *        description: OK
