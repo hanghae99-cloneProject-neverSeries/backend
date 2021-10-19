@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /reviews/{productNo}:
+ * /reviews/{productId}:
  *  post:
  *    summary: 댓글 작성 API
  *    description: 책에 관한 댓글을 작성하는 API 입니다.
@@ -8,7 +8,7 @@
  *      - 댓글
  *    parameters:
  *      - in: path
- *        name: productNo
+ *        name: productId
  *        schema:
  *          type: integer
  *        required: true
@@ -40,7 +40,7 @@
 
 /**
  * @swagger
- * /reviews/{productNo}:
+ * /reviews/{productId}:
  *  put:
  *    summary: 댓글 수정 API
  *    description: 책에 관한 댓글을 수정하는 API 입니다.
@@ -48,7 +48,7 @@
  *      - 댓글
  *    parameters:
  *      - in: path
- *        name: productNo
+ *        name: productId
  *        schema:
  *          type: integer
  *        required: true
@@ -95,7 +95,7 @@
 
 /**
  * @swagger
- * /reviews/{productNo}:
+ * /reviews/{productId}:
  *  delete:
  *    summary: 댓글 삭제 API
  *    description: 책에 관한 댓글을 삭제하는 API 입니다.
@@ -103,7 +103,7 @@
  *      - 댓글
  *    parameters:
  *      - in: path
- *        name: productNo
+ *        name: productId
  *        schema:
  *          type: integer
  *        required: true
