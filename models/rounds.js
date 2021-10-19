@@ -27,9 +27,5 @@ module.exports = class Round extends Sequelize.Model {
       foreignKey: "productId",
       targetKey: "id",
     });
-    db.Round.belongsTo(db.User, {
-      foreignKey: "userId",
-      targetKey: "id",
-    });
   }
 };

@@ -9,11 +9,6 @@ module.exports = class Review extends Sequelize.Model {
         //   allowNull: false,
         //   required: true,
         // },
-        productId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          required: true,
-        },
         review: {
           type: Sequelize.STRING,
           allowNull: false,

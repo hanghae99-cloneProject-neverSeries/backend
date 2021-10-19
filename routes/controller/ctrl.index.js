@@ -1,8 +1,8 @@
-const { Product } = require("../models/products");
+const Product = require("../../models/products");
 const { Op } = require("sequelize");
-const { User } = require("../models/users");
-const { Round } = require("../models/rounds");
-const { Like } = require("../models/likes");
+const User = require("../../models/users");
+const Round = require("../../models/rounds");
+const Like = require("../../models/likes");
 
 const getProcess = {
   //홈화면 전체 상품 조회
@@ -23,7 +23,7 @@ const getProcess = {
     } catch (err) {}
   },
 
-  postMuffinCharge: async (req, res) => {
+  postChargeMuffin: async (req, res) => {
     try {
     } catch (err) {}
   },

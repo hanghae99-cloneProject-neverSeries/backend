@@ -4,7 +4,7 @@ const Review = require("../models/reviews");
 const Like = require("../models/likes");
 const Round = require("../models/rounds");
 const router = express.Router();
-const ctrlIndex = require("../controller/ctrl.index");
+const ctrlIndex = require("./controller/ctrl.index");
 const { User } = require("../models");
 
 // router.post("/", ctrlIndex.getProcess.getPost); //게시글 조회
@@ -48,7 +48,7 @@ router.get("/mypage", async (req, res) => {
 //머핀 충전
 router.post("/muffin", async (req, res) => {
   try {
-    //   const { userId } = req.locals
+    //   const { userId } = req.local
     const userId = 12;
     const user = await User.findOne({ where: { id: userId } });
     const beforeMuffin = user.muffin;
@@ -72,16 +72,12 @@ router.post("/muffin", async (req, res) => {
 //상품 구매
 router.put("/buy", async (req, res) => {
   try {
-    // const { userId } = req.locals;
+    // const { userId } = req.local;
     const userId = 12;
 
     console.log(req.body);
     const { productId, round } = req.body;
-    const rounds = await Round.create({
-      userId: userId,
-      productId: productId,
-      round: round,
-    });
+
     console.log(rounds);
   } catch (err) {
     res.status(400).send({
