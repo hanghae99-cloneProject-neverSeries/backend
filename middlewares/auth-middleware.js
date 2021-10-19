@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     if (token) {
       const {userId} = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findOne({where: {userId}});
-      res.locals.user = user.userId;
+      res.locals.userId = user.userId;
       next();
     } else {
       return res.send(`${req.url}, ${req.method}, ${req.error}`, '인증받지 않은 사용자');
