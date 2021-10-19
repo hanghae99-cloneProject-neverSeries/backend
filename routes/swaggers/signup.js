@@ -26,9 +26,9 @@
  *                type: string
  *                required: true
  *            example:
- *              userId: "test"
- *              pw: "1234"
- *              pwCheck: "1234"
+ *              userId: "this_is_test"
+ *              pw: "thisTest123!"
+ *              pwCheck: "thisTest123!"
  *              nickname: "test"
  *    responses:
  *      200:
