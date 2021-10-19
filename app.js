@@ -7,7 +7,7 @@ const novelRouter = require("./routes/novel");
 
 const app = express();
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log('MYSQL 연결 성공');
   })

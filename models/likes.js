@@ -12,11 +12,6 @@ module.exports = class Like extends Sequelize.Model {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
     }, {
       sequelize,
       timestamps: false,
