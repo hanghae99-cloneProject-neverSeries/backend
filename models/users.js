@@ -26,6 +26,7 @@ module.exports = class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
+        // 필요없는 부분아닌가싶다
         productId: {
           type: Sequelize.INTEGER,
         },
@@ -54,16 +55,15 @@ module.exports = class User extends Sequelize.Model {
       sourceKey: "id",
     });
 
-    // User 와 Product --> 1:N
-    db.User.hasMany(db.Product, {
-      foreignKey: "userId",
-      sourceKey: "id",
-    });
-
     // User 와 Round --> 1:N
     db.User.hasMany(db.Round, {
       foreignKey: "userId",
       sourceKey: "id",
+    });
+
+    db.User.hasMany(db.BuyProduct, {
+      foreignKey: "userId",
+      targetKey: "id",
     });
   }
 };
