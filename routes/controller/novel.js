@@ -1,8 +1,7 @@
-const Products = require('../../models/products');
-const Reviews = require('../../models/reviews');
-const Likes = require('../../models/likes');
-const Rounds = require('../../models/rounds');
-
+const Products = require("../../models/products");
+const Reviews = require("../../models/reviews");
+const Likes = require("../../models/likes");
+const Rounds = require("../../models/rounds");
 
 //상세페이지(product의 세부 정보와 댓글 배열을 보내준다.)
 const getProduct = async (req, res) => {
@@ -15,20 +14,17 @@ const getProduct = async (req, res) => {
     // 도서 찾기
     const product = await Products.findOne({
       where: { id: productId },
-      include: [
-        { model: Likes },
-      ]
+      include: [{ model: Likes }],
     });
     console.log(product);
     // 리뷰 찾기
     const reviews = await Reviews.findAll({
       where: { productId: productId },
-    })
+    });
     res.send({ product: product, reviews: reviews });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
-    res.status(400).send({ msg: error.message })
+    res.status(400).send({ msg: error.message });
   }
 };
 
@@ -40,7 +36,11 @@ const createProduct = async (req, res) => {
     const { title, description, bookInfo, round, imgURL } = req.body;
 
     const product = await Products.create({
-      title, description, bookInfo, round, imgURL
+      title,
+      description,
+      bookInfo,
+      round,
+      imgURL,
     });
 
     const productId = product.id;
@@ -72,7 +72,7 @@ const createProduct = async (req, res) => {
     res.send({ msg: "더미데이터 생성" });
   } catch (error) {
     console.log(error);
-    res.status(400).send({ msg: error.message })
+    res.status(400).send({ msg: error.message });
   }
 };
 
@@ -83,35 +83,35 @@ const handleLike = async (req, res) => {
     const { productId, like } = req.body;
     const { user_id } = res.locals;
     // const userIdTmp = 12;
-    //포스트맨에서 req.body의 like가 
+    //포스트맨에서 req.body의 like가
     //'true', 'false' 문자열로 들어왔어서 == 으로 했는데 나중에 변경
 
-    if (like == 'true') {//좋아요가 true인 상태에서는 추가
+    if (like) {
+      //좋아요가 true인 상태에서는 추가
       const likes = await Likes.create({
         user_id: user_id,
         productId: productId,
-      })
+      });
       console.log(likes);
-    }
-    else {//좋아요가 false인 상태에서는 삭제
+    } else {
+      //좋아요가 false인 상태에서는 삭제
       await Likes.destroy({
         where: {
           user_id: user_id,
-          productId: productId
-        }
-      })
+          productId: productId,
+        },
+      });
     }
-    console.log("like = " + like)
-    res.send({ msg: "like = " + like })
+    console.log("like = " + like.toString());
+    res.send({ msg: "like = " + like.toString() });
   } catch (error) {
     console.log(error);
-    res.status(400).send({ msg: error.message })
+    res.status(400).send({ msg: error.message });
   }
-}
-
+};
 
 module.exports = {
   getProduct,
   createProduct,
   handleLike,
-}
+};

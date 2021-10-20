@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require("express");
 const Product = require("../models/products");
 const router = express.Router();
@@ -91,4 +92,20 @@ router.put("/buy", authUser, async (req, res, next) => {
     next(err);
   }
 });
+=======
+const express = require('express');
+const router = express.Router();
+const authUser = require('../middlewares/auth-middleware');
+
+//홈 화면 조회
+router.get('/', home);
+//마이페이지
+router.get('/mypage', authUser, mypage);
+//머핀 충전
+router.post('/muffin', authUser, buyMuffin);
+//상품 구매
+router.put('/buy', authUser, buyProduct);
+
+
+>>>>>>> f847bc638bb87af27411253ef248c727d50ae556
 module.exports = router;
