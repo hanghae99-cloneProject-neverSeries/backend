@@ -1,15 +1,15 @@
 const Sequelize = require("sequelize");
 
-module.exports = class Review extends Sequelize.Model {
+module.exports = class BuyProduct extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        nickname: {
-          type: Sequelize.STRING,
+        productId: {
+          type: Sequelize.INTEGER,
           allowNull: false,
         },
-        review: {
-          type: Sequelize.STRING,
+        round: {
+          type: Sequelize.INTEGER,
           allowNull: false,
         },
       },
@@ -17,8 +17,8 @@ module.exports = class Review extends Sequelize.Model {
         sequelize,
         timestamps: false,
         underscored: false,
-        modelName: "User",
-        tableName: "users",
+        modelName: "BuyProduct",
+        tableName: "buyProducts",
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -26,15 +26,9 @@ module.exports = class Review extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.Review.belongsTo(db.User, {
+    db.BuyProduct.belongsTo(db.User, {
       foreignKey: "user_id",
       targetKey: "id",
-    });
-
-    db.Review.belongsTo(db.Product, {
-      foreignKey: "productId",
-      targetKey: "id",
-      onDelete: "CASCADE",
     });
   }
 };

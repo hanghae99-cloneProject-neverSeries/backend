@@ -22,15 +22,14 @@
  *              nickname:
  *                type: string
  *                required: true
- *              reviews:
+ *              review:
  *                type: string
  *                required: true
  *              createdAt:
  *                type: string
  *                required: true
  *            example:
- *              nickname: test
- *              reviews: 리뷰입니다.
+ *              review: 리뷰입니다.
  *              createdAt: 2021-10-19 11:11:11
  *    responses:
  *      200:
@@ -62,12 +61,12 @@
  *              reviewsId:
  *                type: integer
  *                required: true
- *              reviews:
+ *              review:
  *                type: string
  *                required: true
  *            example:
  *              reviewsId: 1
- *              reviews: 리뷰입니다.
+ *              review: 리뷰가 아닙니다.
  *    responses:
  *      200:
  *        description: 정상적인 요청, 응답

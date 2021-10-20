@@ -33,7 +33,7 @@
  *                    round:
  *                      type: string
  *                    like:
- *                      type: integer
+ *                      type: array
  *                    userId:
  *                      type: integer
  *                    imgURL:
@@ -52,8 +52,8 @@
  *                  title: 화산 귀환
  *                  description: 대 화산화 13대 제자, 천하삼대검수, 매화검존..
  *                  bookInfo: 무협 비가 러프미디어 전체이용가
- *                  round: 1000
- *                  like: 3000
+ *                  round: 5
+ *                  like: []
  *                  userId: 1
  *                  imgURL: https://series.naver.com/novel/detail.series?productNo=4130558#
  *                reviews:
@@ -87,7 +87,7 @@
  *                type: string
  *                required: true
  *              round:
- *                type: string
+ *                type: integer
  *                required: true
  *              imgURL:
  *                type: string
@@ -96,7 +96,7 @@
  *              title: 화산 귀환
  *              description: 대 화산화 13대 제자, 천하삼대검수, 매화검존..
  *              bookInfo: 무협 비가 러프미디어 전체이용가
- *              round: 1000
+ *              round: 5
  *              imgURL: https://series.naver.com/novel/detail.series?productNo=4130558#
  *    responses:
  *      200:
@@ -129,10 +129,10 @@
  *              productId:
  *                type: integer
  *              like:
- *                type: string
+ *                type: boolean
  *            example:
  *              productId: 1
- *              like: like
+ *              like: true
  *    responses:
  *      200:
  *        description: 정상적인 요청, 응답

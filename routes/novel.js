@@ -1,9 +1,6 @@
 const express = require("express");
-const {
-  getProduct,
-  createProduct,
-  handleLike,
-} = require('./controller/novel')
+const { getProduct, createProduct, handleLike } = require("./controller/novel");
+const authMiddleware = require("../middlewares/auth-middleware");
 
 const router = express.Router();
 
@@ -12,6 +9,6 @@ router.get("/:productId", getProduct);
 //product 추가(임시 테스트 데이터 추가용)
 router.post("/", createProduct);
 //좋아요 추가, 삭제
-router.post('/like', handleLike)
+router.post("/like", handleLike);
 
 module.exports = router;
