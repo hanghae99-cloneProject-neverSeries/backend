@@ -2,7 +2,9 @@ const Products = require("../../models/products");
 const Reviews = require("../../models/reviews");
 const Likes = require("../../models/likes");
 const Rounds = require("../../models/rounds");
+const { string } = require("joi");
 
+// Todo ---> Like : [좋아요 갯수(length), status(본인이 좋아요 유무)]
 //상세페이지(product의 세부 정보와 댓글 배열을 보내준다.)
 const getProduct = async (req, res) => {
   try {
@@ -102,6 +104,7 @@ const handleLike = async (req, res) => {
         },
       });
     }
+
     console.log("like = " + like.toString());
     res.send({ msg: "like = " + like.toString() });
   } catch (error) {

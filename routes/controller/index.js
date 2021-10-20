@@ -1,44 +1,7 @@
-<<<<<<< HEAD
-const Product = require("../../models/products");
-const { Op } = require("sequelize");
-const User = require("../../models/users");
-const Round = require("../../models/rounds");
-const Like = require("../../models/likes");
-
-const getProcess = {
-  //홈화면 전체 상품 조회
-  getProduct: async (req, res) => {
-    try {
-      const products = await Product.findAll({});
-      res.status(201).send({ ok: true, result: products });
-    } catch (err) {
-      res.status(400).send({
-        ok: false,
-        message: "상품 조회 오류 발생",
-      });
-    }
-  },
-
-  getMypage: async (req, res) => {
-    try {
-    } catch (err) {}
-  },
-
-  postChargeMuffin: async (req, res) => {
-    try {
-    } catch (err) {}
-  },
-
-  putBuyProduct: async (req, res) => {
-    try {
-    } catch (err) {}
-  },
-};
-=======
-const Product = require('../models/products');
-const { User } = require('../models');
-const BuyProduct = require('../models/buyproducts');
-const { Sequelize, Op } = require('sequelize');
+const Product = require("../models/products");
+const { User } = require("../models");
+const BuyProduct = require("../models/buyproducts");
+const { Sequelize, Op } = require("sequelize");
 
 //홈 화면 조회
 const home = async (req, res, next) => {
@@ -57,18 +20,20 @@ const mypage = async (req, res, next) => {
     const buyproduct = await BuyProduct.findAll({
       where: { user_id: user_id },
       raw: true,
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('productId')), 'productId']]
+      attributes: [
+        [Sequelize.fn("DISTINCT", Sequelize.col("productId")), "productId"],
+      ],
     });
 
-    const id = (buyproduct.map(((value, index) => {
+    const id = buyproduct.map((value, index) => {
       return { id: value.productId };
-    })));
+    });
 
     const products = await Product.findAll({
       where: {
-        [Op.or]: id
+        [Op.or]: id,
       },
-      raw: true
+      raw: true,
     });
     console.log(products);
     res.send(products);
@@ -83,7 +48,7 @@ const buyMuffin = async (req, res, next) => {
     const { userId } = res.locals;
     const muffin = Number(res.locals.muffin) + Number(req.body.muffin);
     await User.update({ muffin }, { where: { userId } });
-    res.send({ msg: '머핀이 충전되었습니다' });
+    res.send({ msg: "머핀이 충전되었습니다" });
   } catch (err) {
     next(err);
   }
@@ -96,14 +61,20 @@ const buyProduct = async (req, res, next) => {
     const { productId, round } = req.body;
 
     if (muffin <= 2) {
-      res.send({ msg: '쿠키가 부족합니다.' });
+      res.send({ msg: "쿠키가 부족합니다." });
     } else {
-      if ((await BuyProduct.findAll({ where: { user_id: user_id, productId, round } })).length > 0) {
-        res.send({ msg: '이미 구매한 도서입니다.' }); // 구매안하기전 : 구매   구매한 후: 보기 --> Todo 프론트 작업 후 불필요한 부분
+      if (
+        (
+          await BuyProduct.findAll({
+            where: { user_id: user_id, productId, round },
+          })
+        ).length > 0
+      ) {
+        res.send({ msg: "이미 구매한 도서입니다." }); // 구매안하기전 : 구매   구매한 후: 보기 --> Todo 프론트 작업 후 불필요한 부분
       } else {
         await User.update({ muffin: muffin - 3 }, { where: { userId } });
         await BuyProduct.create({ user_id: user_id, productId, round });
-        res.send({ msg: '구매 완료' });
+        res.send({ msg: "구매 완료" });
       }
     }
   } catch (err) {
@@ -111,5 +82,4 @@ const buyProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { home, mypage, buyMuffin, buyProduct }
->>>>>>> f847bc638bb87af27411253ef248c727d50ae556
+module.exports = { home, mypage, buyMuffin, buyProduct };

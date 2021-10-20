@@ -47,15 +47,9 @@ module.exports = class User extends Sequelize.Model {
     });
     // User 와 Like --> 1:N
     db.User.hasMany(db.Like, {
-<<<<<<< HEAD
       foreignKey: "user_id",
       sourceKey: "id",
     });
-=======
-      foreignKey: 'user_id',
-      sourceKey: 'id',
-    })
->>>>>>> f847bc638bb87af27411253ef248c727d50ae556
 
     db.User.hasMany(db.BuyProduct, {
       foreignKey: "user_id",
