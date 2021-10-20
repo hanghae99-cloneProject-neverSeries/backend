@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authUser = require('../middlewares/auth-middleware');
+const {home, mypage, buyMuffin, buyProduct} = require('./controller/index');
 
 //홈 화면 조회
 router.get('/', home);

@@ -2,8 +2,10 @@ const Products = require('../../models/products');
 const Reviews = require('../../models/reviews');
 const Likes = require('../../models/likes');
 const Rounds = require('../../models/rounds');
+const {string} = require('joi');
 
 
+// Todo ---> Like : [좋아요 갯수(length), status(본인이 좋아요 유무)]
 //상세페이지(product의 세부 정보와 댓글 배열을 보내준다.)
 const getProduct = async (req, res) => {
   try {
@@ -86,7 +88,7 @@ const handleLike = async (req, res) => {
     //포스트맨에서 req.body의 like가 
     //'true', 'false' 문자열로 들어왔어서 == 으로 했는데 나중에 변경
 
-    if (like == 'true') {//좋아요가 true인 상태에서는 추가
+    if (like) {//좋아요가 true인 상태에서는 추가
       const likes = await Likes.create({
         user_id: user_id,
         productId: productId,
@@ -101,8 +103,9 @@ const handleLike = async (req, res) => {
         }
       })
     }
-    console.log("like = " + like)
-    res.send({ msg: "like = " + like })
+
+    console.log("like = " + like.toString())
+    res.send({ msg: "like = " + like.toString() })
   } catch (error) {
     console.log(error);
     res.status(400).send({ msg: error.message })
