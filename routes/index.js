@@ -6,8 +6,6 @@ const BuyProduct = require('../models/buyproducts');
 const authUser = require('../middlewares/auth-middleware');
 const {Sequelize, Op} = require('sequelize');
 
-// router.post("/", ctrlIndex.getProcess.getPost); //게시글 조회
-
 //홈 화면 조회
 router.get('/', async (req, res, next) => {
   try {
@@ -23,9 +21,9 @@ router.get('/', async (req, res, next) => {
 //마이페이지
 router.get('/mypage', authUser, async (req, res, next) => {
   try {
-    const {user_Id} = res.locals;
+    const {user_id} = res.locals;
     const buyproduct = await BuyProduct.findAll({
-      where: {userId: user_Id},
+      where: {userId: user_id},
       raw: true,
       attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('productId')), 'productId']]
     });
@@ -62,7 +60,7 @@ router.post('/muffin', authUser, async (req, res, next) => {
 //상품 구매
 router.put('/buy', authUser, async (req, res, next) => {
   try {
-    const {userId, user_Id} = res.locals;
+    const {userId, user_id} = res.locals;
     const {productId, round} = req.body;
     const userInfo = await User.findOne(
       {
@@ -75,11 +73,11 @@ router.put('/buy', authUser, async (req, res, next) => {
     if (userMuffin <= 2) {
       res.send({msg: '쿠키가 부족합니다.'});
     } else {
-      if ((await BuyProduct.findAll({where: {userId: user_Id, productId, round}})).length > 0) {
+      if ((await BuyProduct.findAll({where: {userId: user_id, productId, round}})).length > 0) {
         res.send({msg: '이미 구매한 도서입니다.'}); // 구매안하기전 : 구매   구매한 후: 보기 --> Todo 프론트 작업 후 불필요한 부분
       } else {
         await User.update({muffin: userMuffin - 3}, {where: {userId}});
-        await BuyProduct.create({userId: user_Id, productId, round});
+        await BuyProduct.create({userId: user_id, productId, round});
         res.send({msg: '구매 완료'});
       }
     }
