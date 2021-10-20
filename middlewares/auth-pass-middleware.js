@@ -4,9 +4,9 @@ const User = require('../models/users');
 
 module.exports = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.split(' ')[1];
 
-    if (token) {
       const { userId } = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findOne({ where: { userId } });
       res.locals.userId = user.userId;
@@ -15,9 +15,9 @@ module.exports = async (req, res, next) => {
       res.locals.muffin = user.muffin;
       next();
     } else {
-      return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
+      next();
     }
   } catch (err) {
-    return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
+    return res.status(401).send({ msg: "알수없는 문제가 생겼습니다." });
   }
 };
