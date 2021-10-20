@@ -4,7 +4,7 @@ const {
   createProduct,
   handleLike,
 } = require('./controller/novel')
-const authMiddleware = require('../middlewares/auth-middleware')
+const authUser = require('../middlewares/auth-middleware')
 
 const router = express.Router();
 
@@ -13,6 +13,6 @@ router.get("/:productId", getProduct);
 //product 추가(임시 테스트 데이터 추가용)
 router.post("/", createProduct);
 //좋아요 추가, 삭제
-router.post('/like', handleLike)
+router.post('/like', authUser, handleLike)
 
 module.exports = router;

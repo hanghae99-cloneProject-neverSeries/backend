@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
       res.locals.userId = user.userId;
       res.locals.user_id = user.id;
       res.locals.nickname = user.nickname;
+      res.locals.muffin = user.muffin;
       next();
     } else {
       return res.send(`${req.url}, ${req.method}, ${req.error}`, '인증받지 않은 사용자');

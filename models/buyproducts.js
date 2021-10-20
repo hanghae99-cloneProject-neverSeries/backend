@@ -27,7 +27,7 @@ module.exports = class BuyProduct extends Sequelize.Model {
   }
   static associate(db) {
     db.BuyProduct.belongsTo(db.User, {
-      foreignKey: "userId",
+      foreignKey: "user_id",
       targetKey: "id",
     });
   }
