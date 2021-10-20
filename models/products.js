@@ -56,10 +56,5 @@ module.exports = class Product extends Sequelize.Model {
       sourceKey: "id",
     });
 
-    // Product 와 User --> 1:N
-    db.Product.belongsTo(db.User, {
-      foreignKey: "userId",
-      sourceKey: "id",
-    });
   }
 };
