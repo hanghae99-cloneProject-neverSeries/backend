@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 const Products = require("../../models/products");
 const Reviews = require("../../models/reviews");
 const Likes = require("../../models/likes");
 const Rounds = require("../../models/rounds");
 const { string } = require("joi");
+=======
+const Products = require('../../models/products');
+const Reviews = require('../../models/reviews');
+const Likes = require('../../models/likes');
+const Rounds = require('../../models/rounds');
+const { string } = require('joi');
+const { Sequelize, Op } = require('sequelize');
+
+>>>>>>> 304ae5c7cdecda8fea26377e57045817fffab2af
 
 // Todo ---> Like : [좋아요 갯수(length), status(본인이 좋아요 유무)]
 //상세페이지(product의 세부 정보와 댓글 배열을 보내준다.)
@@ -10,13 +20,28 @@ const getProduct = async (req, res) => {
   try {
     console.log(req.params);
     const { productId } = req.params;
-    console.log(productId);
+    const user_id = res.locals.user_id ? res.locals.user_id : "";
     // const all = await Products.findAll();
     // console.log(all);
     // 도서 찾기
     const product = await Products.findOne({
       where: { id: productId },
+<<<<<<< HEAD
       include: [{ model: Likes }],
+=======
+      attributes: {
+        include: [
+          [Sequelize.fn('COUNT', Sequelize.col('likes.id')), 'like_count'],
+          [Sequelize.where(Sequelize.col('likes.user_id'), user_id), 'is_my_like'],
+        ]
+      },
+      include: [
+        {
+          model: Likes,
+          attributes: [],
+        },
+      ]
+>>>>>>> 304ae5c7cdecda8fea26377e57045817fffab2af
     });
     console.log(product);
     // 리뷰 찾기
