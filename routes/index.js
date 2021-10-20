@@ -4,7 +4,7 @@ const Review = require("../models/reviews");
 const Like = require("../models/likes");
 const Round = require("../models/rounds");
 const router = express.Router();
-const ctrlIndex = require("./controller/ctrl.index");
+const ctrlIndex = require("./controller/index");
 const { User } = require("../models");
 
 // router.post("/", ctrlIndex.getProcess.getPost); //게시글 조회
@@ -77,8 +77,6 @@ router.put("/buy", async (req, res) => {
 
     console.log(req.body);
     const { productId, round } = req.body;
-
-    console.log(rounds);
   } catch (err) {
     res.status(400).send({
       //에러처리
