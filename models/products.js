@@ -55,6 +55,5 @@ module.exports = class Product extends Sequelize.Model {
       foreignKey: "productId",
       sourceKey: "id",
     });
-
   }
 };

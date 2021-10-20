@@ -26,10 +26,6 @@ module.exports = class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
-        // 필요없는 부분아닌가싶다
-        productId: {
-          type: Sequelize.INTEGER,
-        },
       },
       {
         sequelize,
@@ -46,20 +42,19 @@ module.exports = class User extends Sequelize.Model {
   static associate(db) {
     // User 와 Review 관계 --> 1:N
     db.User.hasMany(db.Review, {
-      foreignKey: "userId",
-      sourceKey: "id",
-    });
+      foreignKey: 'user_id',
+      sourceKey: 'id',
+    })
     // User 와 Like --> 1:N
     db.User.hasMany(db.Like, {
-      foreignKey: "userId",
-      sourceKey: "id",
-    });
+      foreignKey: 'user_id',
+      sourceKey: 'id',
+    })
 
-    // User 와 Round --> 1:N
-    db.User.hasMany(db.Round, {
-      foreignKey: "userId",
-      sourceKey: "id",
-    });
+    db.User.hasMany(db.Product, {
+      foreignKey: 'user_id',
+      sourceKey: 'id',
+    })
 
     db.User.hasMany(db.BuyProduct, {
       foreignKey: "userId",
