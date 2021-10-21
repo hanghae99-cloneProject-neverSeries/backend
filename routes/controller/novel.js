@@ -2,29 +2,56 @@ const Products = require('../../models/products');
 const Reviews = require('../../models/reviews');
 const Likes = require('../../models/likes');
 const Rounds = require('../../models/rounds');
+const { Sequelize, } = require('sequelize');
 
 
+// Todo ---> Like : [좋아요 갯수(length), status(본인이 좋아요 유무)]
 //상세페이지(product의 세부 정보와 댓글 배열을 보내준다.)
 const getProduct = async (req, res) => {
   try {
     console.log(req.params);
     const { productId } = req.params;
-    console.log(productId);
+    const user_id = res.locals.user_id ? res.locals.user_id : "";
+    const myMuffin = res.locals.muffin ? res.locals.muffin : 0;
     // const all = await Products.findAll();
-    // console.log(all);
+    console.log(user_id);
+    console.log(myMuffin);
+
     // 도서 찾기
     const product = await Products.findOne({
       where: { id: productId },
+      attributes: {
+        include: [
+          [Sequelize.fn('COUNT', Sequelize.col('Likes.id')), 'like_count'],
+        ]
+      },
       include: [
-        { model: Likes },
-      ]
+        {
+          model: Rounds,
+          attributes: ['round'],
+          separate: true,
+        },
+        {
+          model: Likes,
+          attributes: [],
+        },
+      ],
+      raw: true
     });
     console.log(product);
+
+    //내가 좋아요를 눌렀는지 (값이 존재하면 누른 것)
+    const myLike = await Likes.findOne({
+      where: { productId, user_id },
+      raw: true
+    })
+
     // 리뷰 찾기
     const reviews = await Reviews.findAll({
       where: { productId: productId },
+      raw: true
     })
-    res.send({ product: product, reviews: reviews });
+    res.send({ product, myLike, myMuffin, reviews });
   }
   catch (error) {
     console.log(error);
@@ -35,6 +62,7 @@ const getProduct = async (req, res) => {
 //product 추가(임시 테스트 데이터 추가용)
 const createProduct = async (req, res) => {
   try {
+    console.log(1);
     console.log(req.body);
     const { title, description, bookInfo, round, imgURL } = req.body;
 
@@ -78,14 +106,14 @@ const createProduct = async (req, res) => {
 const handleLike = async (req, res) => {
   try {
     console.log(req.body);
-    console.log(req.locals);
+    console.log(res.locals);
     const { productId, like } = req.body;
-    const { user_id } = req.locals;
+    const { user_id } = res.locals;
     // const userIdTmp = 12;
     //포스트맨에서 req.body의 like가 
     //'true', 'false' 문자열로 들어왔어서 == 으로 했는데 나중에 변경
 
-    if (like == 'true') {//좋아요가 true인 상태에서는 추가
+    if (like) {//좋아요가 true인 상태에서는 추가
       const likes = await Likes.create({
         user_id: user_id,
         productId: productId,
@@ -100,8 +128,9 @@ const handleLike = async (req, res) => {
         }
       })
     }
-    console.log("like = " + like)
-    res.send({ msg: "like = " + like })
+
+    console.log("like = " + like.toString())
+    res.send({ msg: "like = " + like.toString() })
   } catch (error) {
     console.log(error);
     res.status(400).send({ msg: error.message })

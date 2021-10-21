@@ -1,21 +1,24 @@
 const Sequelize = require("sequelize");
 
-module.exports = class Round extends Sequelize.Model {
+module.exports = class BuyProduct extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        round: {
+        productId: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          required: true,
         },
+        round: {
+          type: Sequelize.INTEGER,
+          allowNull: false
+        }
       },
       {
         sequelize,
         timestamps: false,
         underscored: false,
-        modelName: "Round",
-        tableName: "rounds",
+        modelName: "BuyProduct",
+        tableName: "buyProducts",
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -23,8 +26,8 @@ module.exports = class Round extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.Round.belongsTo(db.Product, {
-      foreignKey: "productId",
+    db.BuyProduct.belongsTo(db.User, {
+      foreignKey: "user_id",
       targetKey: "id",
     });
   }
