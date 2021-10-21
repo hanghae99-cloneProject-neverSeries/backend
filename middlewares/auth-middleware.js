@@ -13,7 +13,6 @@ module.exports = async (req, res, next) => {
     if (tokenValue === null || !tokenValue || tokenValue === "undefined") {
       return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
     }
-
     const { userId } = jwt.verify(tokenValue, process.env.JWT_SECRET);
     const user = await User.findOne({ where: { userId } });
     res.locals.userId = user.userId;
@@ -21,6 +20,7 @@ module.exports = async (req, res, next) => {
     res.locals.nickname = user.nickname;
     res.locals.muffin = user.muffin;
     next();
+    return;
   } catch (err) {
     return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
   }

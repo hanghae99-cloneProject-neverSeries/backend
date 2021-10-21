@@ -48,6 +48,9 @@ const signup = async (req, res, next) => {
     if (await User.findOne({ where: { userId } })) {
       res.send({ msg: "이미 존재하는 아이디입니다." });
     }
+    if (await User.findOne({ where: { nickname } })) {
+      res.send({ msg: "이미 존재하는 닉네임입니다." });
+    }
 
     // 모든 조건 통과 시 비밀번화 단방향 암호화 및 user 생성
     const EncryptPw = bcrypt.hashSync(pw, parseInt(process.env.SALT));

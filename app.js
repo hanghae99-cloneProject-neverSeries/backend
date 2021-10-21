@@ -3,12 +3,12 @@ require("dotenv").config();
 const logger = require("morgan");
 const { sequelize } = require("./models");
 const { swaggerUi, specs } = require("./swagger/swagger");
-const signupPage = require("./routes/signup");
-const loginPage = require("./routes/login");
+const loginAuth = require("./routes/auth");
 const errorHandler = require("./middlewares/error-middleware");
 const novelRouter = require("./routes/novel");
 const indexRouter = require("./routes/");
 const reviewsRouter = require("./routes/reviews");
+
 const cors = require("cors");
 const app = express();
 
@@ -34,8 +34,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", indexRouter);
-app.use("/signup", signupPage);
-app.use("/login", loginPage);
+app.use("/", loginAuth);
 app.use("/novel", novelRouter);
 app.use("/reviews", reviewsRouter);
 

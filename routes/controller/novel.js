@@ -1,6 +1,6 @@
 const Products = require("../../models/products");
 const Reviews = require("../../models/reviews");
-const Like = require("../../models/likes");
+const Likes = require("../../models/likes");
 const Rounds = require("../../models/rounds");
 const { Sequelize } = require("sequelize");
 
@@ -13,15 +13,15 @@ const getProduct = async (req, res) => {
     const user_id = res.locals.user_id ? res.locals.user_id : "";
     const myMuffin = res.locals.muffin ? res.locals.muffin : 0;
     // const all = await Products.findAll();
-    // console.log(all);
+    console.log(user_id);
+    console.log(myMuffin);
 
     // 도서 찾기
-    console.log(rounds);
     const product = await Products.findOne({
       where: { id: productId },
       attributes: {
         include: [
-          [Sequelize.fn("COUNT", Sequelize.col("likes.id")), "like_count"],
+          [Sequelize.fn("COUNT", Sequelize.col("Likes.id")), "like_count"],
         ],
       },
       include: [
@@ -31,7 +31,7 @@ const getProduct = async (req, res) => {
           separate: true,
         },
         {
-          model: Like,
+          model: Likes,
           attributes: [],
         },
       ],
@@ -40,7 +40,7 @@ const getProduct = async (req, res) => {
     console.log(product);
 
     //내가 좋아요를 눌렀는지 (값이 존재하면 누른 것)
-    const myLike = await Like.findOne({
+    const myLike = await Likes.findOne({
       where: { productId, user_id },
       raw: true,
     });
