@@ -6,26 +6,20 @@ module.exports = async (req, res, next) => {
   try {
     const { authorization } = req.headers
     if (authorization) {
-      console.log('헤더가 없음')
       next();
       return;
     }
-
     const tokenType = req.headers.authorization.split(' ')[0];
     const tokenValue = authorization.split(' ')[1];
-    console.log(tokenValue)
 
     if (tokenType !== "Bearer") {
       next();
       return;
     }
     if (tokenValue === null || !tokenValue || tokenValue === 'undefined') {
-      console.log('헤더는 있으나 토큰이 없음')
       next();
       return;
     }
-
-    console.log('성공');
     const { userId } = jwt.verify(tokenValue, process.env.JWT_SECRET);
     const user = await User.findOne({ where: { userId } });
 
