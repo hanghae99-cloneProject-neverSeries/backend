@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
     if (authorization) {
       console.log('헤더가 없음')
       next();
+      return;
     }
 
     const tokenType = req.headers.authorization.split(' ')[0];
@@ -16,12 +17,15 @@ module.exports = async (req, res, next) => {
 
     if (tokenType !== "Bearer") {
       next();
+      return;
     }
     if (tokenValue === null || !tokenValue || tokenValue === 'undefined') {
       console.log('헤더는 있으나 토큰이 없음')
       next();
+      return;
     }
 
+    console.log('성공');
     const { userId } = jwt.verify(tokenValue, process.env.JWT_SECRET);
     const user = await User.findOne({ where: { userId } });
 
@@ -30,6 +34,7 @@ module.exports = async (req, res, next) => {
     res.locals.nickname = user.nickname;
     res.locals.muffin = user.muffin;
     next();
+    return;
   }
   catch (error) {
     return res.status(400).send({ msg: "알수없는 오류가 발생했습니다." });

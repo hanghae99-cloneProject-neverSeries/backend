@@ -21,6 +21,7 @@ module.exports = async (req, res, next) => {
     res.locals.nickname = user.nickname;
     res.locals.muffin = user.muffin;
     next();
+    return;
   } catch (err) {
     return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
   }
