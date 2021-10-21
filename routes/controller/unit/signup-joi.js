@@ -1,4 +1,6 @@
 const joi = require('joi');
+const User = require('../../../models/users');
+const {where} = require('sequelize');
 
 // Todo --> 테스트 코드 진행... 어케 하누
 async function signJoi(req) {
@@ -18,4 +20,13 @@ async function signJoi(req) {
   return {userId, pw, pwCheck, nickname};
 }
 
-module.exports = {signJoi};
+// 아이디 중복 및 닉네임 중복 검사
+async function dupCheckId(userId, nickname) {
+  if (await User.findOne({where: {userId}})) {
+    throw new Error('이미 존재하는 아이디입니다.');
+  } else if (await User.findOne({where: {nickname}})) {
+    throw new Error('이미 존재하는 닉네임입니다.');
+  }
+}
+
+module.exports = {signJoi, dupCheckId};
