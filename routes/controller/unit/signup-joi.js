@@ -22,11 +22,11 @@ async function signJoi(req) {
 
 // 아이디 중복 및 닉네임 중복 검사
 async function dupCheckId(userId, nickname) {
-  if (await User.findOne({where: {userId}})) {
-    throw new Error('이미 존재하는 아이디입니다.');
-  } else if (await User.findOne({where: {nickname}})) {
-    throw new Error('이미 존재하는 닉네임입니다.');
-  }
+    if (await User.findOne({where: {userId}})) {
+      throw new Error('이미 존재하는 아이디입니다.');
+    } else if (await User.findOne({where: {nickname}})) {
+      throw new Error('이미 존재하는 닉네임입니다.');
+    }
 }
 
 // 단방향 암호화 및 회원가입
