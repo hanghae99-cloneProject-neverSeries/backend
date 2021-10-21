@@ -1,6 +1,6 @@
 const joi = require('joi');
 const User = require('../../../models/users');
-const {where} = require('sequelize');
+const bcrypt = require('bcrypt');
 
 // Todo --> 테스트 코드 진행... 어케 하누
 async function signJoi(req) {
@@ -29,4 +29,11 @@ async function dupCheckId(userId, nickname) {
   }
 }
 
-module.exports = {signJoi, dupCheckId};
+// 단방향 암호화 및 회원가입
+async function createUser(userId, pw, nickname, res) {
+  const EncryptPw = bcrypt.hashSync(pw, parseInt(process.env.SALF));
+  await User.create({userId, pw: EncryptPw, nickname});
+  return res.send({msg: '회원 가입을 축하드립니다.'});
+}
+
+module.exports = {signJoi, dupCheckId, createUser};
