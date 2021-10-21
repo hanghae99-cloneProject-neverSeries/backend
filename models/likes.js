@@ -1,8 +1,16 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 module.exports = class Like extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
+      // user_id: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      // },
+      // productId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      // },
     }, {
       sequelize,
       timestamps: false,
@@ -19,10 +27,11 @@ module.exports = class Like extends Sequelize.Model {
       foreignKey: 'user_id',
       targetKey: 'id',
     })
+
     db.Like.belongsTo(db.Product, {
-      foreignKey: "productId",
-      targetKey: "id",
-      onDelete: "CASCADE",
-    });
+      foreignKey: 'productId',
+      targetKey: 'id',
+      onDelete: 'CASCADE',
+    })
   }
 };
