@@ -6,12 +6,13 @@ const User = require("../models/users");
 
 test("정상적인 토큰을 넣은 경우 User.findOne이 실행된다.", () => {
   User.findOne = jest.fn();
+
   authMiddleware(
     {
       headers: {
         //시크릿 키를 이용한 정상토큰
         authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhc2RmIn0.lzZkSzkjZ1FUDab5iubSL2sVzY2PpQKXj9ddcn24Xn8",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyfQ.dxFDkcnvQ3MnovKPb0ui5mlJyZ_eApICRBNkDa2ILXk",
       },
     },
     {
@@ -21,6 +22,7 @@ test("정상적인 토큰을 넣은 경우 User.findOne이 실행된다.", () =>
       locals: {},
     }
   );
+
   expect(User.findOne).toHaveBeenCalled();
 });
 
@@ -31,7 +33,7 @@ test("프론트에서 넘겨줄 때 Bearer를 붙이지 않고 넘겨줄 경우 
     {
       headers: {
         authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XJ9tvUkwJFn8GAN8YRNIOlXTlF7bcoMOMxD5WPNAEAg",
+          "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhc2RmIn0.PVY1ewMzniYr_y-BYbRvHf1UG72YTJFy6C6xJP92-4frX9jZD2wYnsBaWFW9NiBP",
       },
     },
     {
