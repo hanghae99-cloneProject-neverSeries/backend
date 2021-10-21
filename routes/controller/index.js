@@ -1,6 +1,6 @@
-const Product = require("../models/products");
-const { User } = require("../models");
-const BuyProduct = require("../models/buyproducts");
+const Product = require("../../models/products");
+const { User } = require("../../models");
+const BuyProduct = require("../../models/buyproducts");
 const { Sequelize, Op } = require("sequelize");
 
 //홈 화면 조회

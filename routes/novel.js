@@ -1,16 +1,7 @@
 const express = require("express");
-<<<<<<< HEAD
 const { getProduct, createProduct, handleLike } = require("./controller/novel");
 const authUser = require("../middlewares/auth-middleware");
-=======
-const {
-  getProduct,
-  createProduct,
-  handleLike,
-} = require('./controller/novel')
-const authUser = require('../middlewares/auth-middleware')
-const authPassUser = require('../middlewares/auth-pass-middleware')
->>>>>>> 304ae5c7cdecda8fea26377e57045817fffab2af
+const authPassUser = require("../middlewares/auth-pass-middleware");
 
 const router = express.Router();
 

@@ -9,7 +9,7 @@ const errorHandler = require("./middlewares/error-middleware");
 const novelRouter = require("./routes/novel");
 const indexRouter = require("./routes/");
 const reviewsRouter = require("./routes/reviews");
-const cors = require('cors');
+const cors = require("cors");
 const app = express();
 
 sequelize
@@ -21,11 +21,13 @@ sequelize
     console.error(err);
   });
 
-app.use(cors({
-  // 쿠키 등록 수정부분
-  credentials: true,
-  origin: true,
-}));
+app.use(
+  cors({
+    // 쿠키 등록 수정부분
+    credentials: true,
+    origin: true,
+  })
+);
 
 app.use("/api", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(logger("dev"));
@@ -41,6 +43,8 @@ app.use("/reviews", reviewsRouter);
 app.use(errorHandler.routerError);
 app.use(errorHandler.errorHandler);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log(`http://localhost:${process.env.PORT}/api`);
 });
+
+module.exports = app;

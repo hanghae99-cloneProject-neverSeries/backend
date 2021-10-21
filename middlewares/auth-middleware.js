@@ -15,14 +15,7 @@ module.exports = async (req, res, next) => {
       res.locals.muffin = user.muffin;
       next();
     } else {
-<<<<<<< HEAD
-      return res.send(
-        `${req.url}, ${req.method}, ${req.error}`,
-        "인증받지 않은 사용자"
-      );
-=======
       return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
->>>>>>> 304ae5c7cdecda8fea26377e57045817fffab2af
     }
   } catch (err) {
     return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
