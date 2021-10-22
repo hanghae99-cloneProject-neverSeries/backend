@@ -38,10 +38,9 @@
 <img src="https://img.shields.io/badge/Node.js-14.15.1-339933?style=flat-square&logo=Node.js&logoColor=339933"/> <img src="https://img.shields.io/badge/Express-4.16.1-000000?style=flat-square&logo=Express&logoColor=000000"/> <img src="https://img.shields.io/badge/MySQL-14.15.1-4479A1?style=flat-square&logo=MySQL&logoColor=4479A1"/> <img src="https://img.shields.io/badge/Sequelize-6.7.0-52B0E7?style=flat-square&logo=Sequelize&logoColor=52B0E7"/> <img src="https://img.shields.io/badge/JSON Web Tokens-8.5.1-000000?style=flat-square&logo=JSON Web Tokens&logoColor=000000"/> <img src="https://img.shields.io/badge/Swagger-6.1.0-85EA2D?style=flat-square&logo=Swagger&logoColor=85EA2D"/>
 <h2>👀View</h2>
 
-[comment]: <> (<img width="2048" alt="스크린샷 2021-10-16 오후 5 14 55" src="https://user-images.githubusercontent.com/58936251/137580149-f3ebcbc5-47d3-4f90-a514-7d1a0ae9a8c8.png">)
-[comment]: <> (<img width="2048" alt="스크린샷 2021-10-16 오후 5 17 10" src="https://user-images.githubusercontent.com/58936251/137580199-4b9f9e22-6984-407a-a2d7-29fd57f7d73e.png">)
-[comment]: <> (<img width="2048" alt="스크린샷 2021-10-16 오후 5 17 24" src="https://user-images.githubusercontent.com/58936251/137580201-2dbdcd8f-33f3-41ae-b739-97914f018c7d.png">)
-[comment]: <> (<img width="2048" alt="스크린샷 2021-10-16 오후 5 17 35" src="https://user-images.githubusercontent.com/84619866/138459800-0ea7d171-5753-4861-9013-081c01f7e01d.png">)
+[comment]: <> (<img width="1024" alt="스크린샷 2021-10-16 오후 5 14 55" src="https://user-images.githubusercontent.com/58936251/137580149-f3ebcbc5-47d3-4f90-a514-7d1a0ae9a8c8.png">)
+[comment]: <> (<img width="1024" alt="스크린샷 2021-10-16 오후 5 17 10" src="https://user-images.githubusercontent.com/58936251/137580199-4b9f9e22-6984-407a-a2d7-29fd57f7d73e.png">)
+[comment]: <> (<img width="1024" alt="스크린샷 2021-10-16 오후 5 17 24" src="https://user-images.githubusercontent.com/58936251/137580201-2dbdcd8f-33f3-41ae-b739-97914f018c7d.png">)
 
 
 <h2>✅API</h2>
@@ -135,4 +134,47 @@
   ```
 
 - **비로그인에 대한 미들웨어**
+
+  이번 프로젝트는 `로그인` 과 `비로그인` 상태가 존재했다.
+
+  소설 상세페이지 같은 경우, `로그인된 사용자`는 현재 가지고 있는 머핀(유료 재화)와 해당 도서에 대한 회차 구매 정보를 지니고 있어야하며, `비로그인된 사용자`는 개인 정보를 가질 수 없다.
   
+  - 로그인
+  ``` jsx
+  const tokenType = req.headers.authorization.split(' ')[0];
+  const tokenValue = req.headers.authorization.split(' ')[1];
+
+    if (tokenType !== "Bearer") {
+      return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
+    }
+    if (tokenValue === null || !tokenValue || tokenValue === 'undefined') {
+      return res.status(401).send({ msg: "로그인 후 이용하실 수 있습니다." });
+    }
+  ```
+ 
+
+  - 비로그인 
+
+    ```jsx
+      const{authorization}= req.headers    // 헤더가 존재하지 않을 경우는 비로그인 사용자
+      if(!authorization) {
+        next();
+        return;
+      }
+      const tokenType = req.headers.authorization.split(' ')[0];
+      const tokenValue = authorization.split(' ')[1];
+      
+      if(tokenType !== "Bearer") {
+        next();
+        return;
+      }
+      if(tokenValue === null || !tokenValue || tokenValue === 'undefined') {
+        next();
+        return;
+      }
+    ```
+  - 이 구현을 한 후, 사용자 미들웨어에서 토큰이 없을 경우, `res.locals.userId = guest` 또는 `res.locals.guest = guest`로 설정하여 API 에서 __로그인 유저, 비로그인 유저__ 에 대한 분기를 `if`문으로 나누어 처리하면 좀 더 간결하게 코드를 짤 수 있을 것 같다.
+
+<h2>📈GitHub Branch</h>
+
+<img width="720" alt="스크린샷" src="https://user-images.githubusercontent.com/84619866/138472311-46d081c1-094f-4689-a48d-1dc145bae571.PNG">
