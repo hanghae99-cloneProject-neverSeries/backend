@@ -101,4 +101,38 @@
   
   초반에 DB 구조를 탄탄하게 구성하지 않았기에 여러번 DB 구조를 수정하고 DROP하는 일이 생겼다. 
 
-  다음 프로젝트부터는 
+  DB 구조 설계는 탄탄하게 설계해야함을 느꼈다.
+
+
+- **Sequelize**
+
+  Sequelize를 사용함에 따라 ORM에 많은 어려움을 겪었다. 아래의 코드는 이번 프로젝트를 하면서 구현하는데 가장 오래걸린 코드다.
+
+  Query문의 JOIN은 Sequelize ORM에서 `includ` 로 수행된다. 또한 `where` 객체를 이용하면 Query 내용을 필터링 할 수 있다. 
+
+  `[Sequelize.fn('COUNT', Sequelize.col('Likes.id')), 'like_count']` 는 참조해온 `Likes` 테이블의 Count를 구하기 위함이며 `rounds` 모델에서는 `separate: true` 를 통해 따로따로 Query문을 요청함으로 `Rounds` 테이블이 `Likes` 테이블 Query문에 대해 영향이 없도록 했다.
+
+  ```jsx
+  const product = await Products.findOne({
+        where: { id: productId },
+        attributes: {
+          include: [
+            [Sequelize.fn('COUNT', Sequelize.col('Likes.id')), 'like_count'],
+          ]
+        },
+        include: [
+          {
+            model: Rounds,   // Rounds 모델 참조
+            attributes: ['round'],
+            separate: true,
+          },
+          {
+            model: Likes,    // Likes 모델 참조
+            attributes: [],
+          },
+        ],
+      });
+  ```
+
+- **비로그인에 대한 미들웨어**
+  
