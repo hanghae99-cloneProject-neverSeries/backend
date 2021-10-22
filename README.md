@@ -1,10 +1,10 @@
 <h1>🚢항해 99</h1>
 
-- 프로젝트  <br>
-  네이버시리즈 클론코딩(https://series.naver.com/novel/home.series?isWebtoonAgreePopUp=true)
+프로젝트
+네이버시리즈 클론코딩(https://series.naver.com/novel/home.series?isWebtoonAgreePopUp=true)
+🎉사이트 주소:
+📺데모 영상
 
-  🎉 사이트 주소 :
-  📺 데모 영상:
 
 🎯 개발 목표
   1. Mysql을 이용한 관계형 데이터베이스 사용
