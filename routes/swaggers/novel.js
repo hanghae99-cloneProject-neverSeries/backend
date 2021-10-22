@@ -24,20 +24,22 @@
  *                product:
  *                  type: object
  *                  properties:
+ *                    id:
+ *                      type: integer
  *                    title:
  *                      type: string
  *                    description:
  *                      type: string
  *                    bookInfo:
  *                      type: string
- *                    round:
- *                      type: string
- *                    like:
- *                      type: array
- *                    userId:
- *                      type: integer
  *                    imgURL:
  *                      type: string
+ *                    like_count:
+ *                      type: integer
+ *                  myLike:
+ *                    type: boolean
+ *                  myMuffin:
+ *                    type: integer
  *                reviews:
  *                  type: object
  *                  properties:
@@ -47,19 +49,33 @@
  *                      type: integer
  *                    review:
  *                      type: string
+ *                buyproduct:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: integer
+ *                    productId:
+ *                      type: integer
+ *                    round:
+ *                      type: integer
+ *                    user_id:
+ *                      type: integer
  *              example:
  *                product:
  *                  title: 화산 귀환
  *                  description: 대 화산화 13대 제자, 천하삼대검수, 매화검존..
  *                  bookInfo: 무협 비가 러프미디어 전체이용가
- *                  round: 5
- *                  like: []
- *                  userId: 1
  *                  imgURL: https://series.naver.com/novel/detail.series?productNo=4130558#
+ *                  star: 9.5
  *                reviews:
  *                  userId: 1
  *                  productId: 1
  *                  review: 무야호?
+ *                buyproduct:
+ *                  id: 1
+ *                  productId: 1
+ *                  round: 10
+ *                  user_id: 1
  */
 
 /**
