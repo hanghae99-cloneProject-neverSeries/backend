@@ -1,4 +1,4 @@
-const {signJoi, dupCheckId, createUser} = require('./unit/signup-joi');
+const {signJoi, dupCheckId, createUser} = require('./unit/signup');
 const printError = require('./unit/error');
 
 const signup = async (req, res) => {
