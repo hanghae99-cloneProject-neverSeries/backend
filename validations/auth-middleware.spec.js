@@ -4,7 +4,7 @@ jest.mock("../models/users");
 
 const User = require("../models/users");
 
-test("정상적인 토큰을 넣은 경우 User.findOne이 실행된다.", () => {
+test("정상적인 토큰을 넣은 경우 User.findOne이 실행된다.", async () => {
   User.findOne = jest.fn();
 
   authMiddleware(
@@ -23,7 +23,7 @@ test("정상적인 토큰을 넣은 경우 User.findOne이 실행된다.", () =>
     }
   );
 
-  expect(User.findOne).toHaveBeenCalled();
+  expect(User.findOne()).toHaveBeenCalled();
 });
 
 test("프론트에서 넘겨줄 때 Bearer를 붙이지 않고 넘겨줄 경우 실패한다.", () => {
