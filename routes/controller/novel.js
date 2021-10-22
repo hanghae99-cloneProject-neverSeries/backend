@@ -53,10 +53,9 @@ const getProduct = async (req, res) => {
     })
 
     const buyproduct = await BuyProduct.findAll({
-      where: { user_id: user_id },
-      raw: true,
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('productId')), 'productId']]
+      where: { user_id: user_id, productId: productId },  // Todo --> 추가된 부분 해당 도서의 구매목록만 보내주어야함. (productId)
     });
+    console.log(buyproduct);
     res.send({ product, myLike, myMuffin, reviews, buyproduct });
   }
   catch (error) {
@@ -68,7 +67,7 @@ const getProduct = async (req, res) => {
 //product 추가(임시 테스트 데이터 추가용)
 const createProduct = async (req, res) => {
   try {
-
+    console.log(req.body);
     const { title, description, bookInfo, round, imgURL, star } = req.body;
 
     const product = await Products.create({
