@@ -39,11 +39,7 @@ describe('머핀 충전에 대한 검사', () => {
   };
   const next = jest.fn();
   test('성공적으로 머핀이 충전되었을 경우 /머핀이 충전되었습니다/ 메세지 응답', async () => {
-    User.update.mockReturnValue(Promise.resolve({
-      buyMuffin() {
-        return Promise.resolve(true);
-      }
-    }));
+    User.update.mockReturnValue(Promise.resolve(true));
     await buyMuffin(req, res, next);
     expect(res.send).toBeCalledWith({msg: '머핀이 충전되었습니다'})
   });
