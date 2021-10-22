@@ -4,22 +4,16 @@
   네이버시리즈 클론코딩(https://series.naver.com/novel/home.series?isWebtoonAgreePopUp=true)
 
   🎉 사이트 주소 :
-
   📺 데모 영상:
 
 
 - :다트:개발 목표
 
   1.Mysql을 이용한 관계형 데이터베이스 사용
-
   2.회원가입 JWT방식 로그인
-
   3.소설 구매 기능
-
   4.소설 좋아요 기능
-
   5.소설 댓글 기능
-
   6.마이페이지 구매 소설 조회
 
 
