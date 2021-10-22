@@ -12,6 +12,10 @@ module.exports = class Review extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        createdAt: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -25,6 +29,7 @@ module.exports = class Review extends Sequelize.Model {
       }
     );
   }
+
   static associate(db) {
     db.Review.belongsTo(db.User, {
       foreignKey: "user_id",

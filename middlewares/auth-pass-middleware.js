@@ -5,8 +5,7 @@ const User = require("../models/users");
 module.exports = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    if (authorization) {
-      console.log("헤더가 없음");
+    if (!authorization) {
       next();
     }
 

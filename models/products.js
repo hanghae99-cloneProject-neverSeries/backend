@@ -26,6 +26,7 @@ module.exports = class Product extends Sequelize.Model {
         },
         star: {
           type: Sequelize.DOUBLE,
+          required: true,
           allowNull: false,
         },
       },
