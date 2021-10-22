@@ -1,6 +1,6 @@
 // 사용자 인증 미들웨어
 const jwt = require('jsonwebtoken');
-const User = require('../models/users');
+const User = require('../../새 폴더/models/users');
 
 module.exports = async (req, res, next) => {
   try {
