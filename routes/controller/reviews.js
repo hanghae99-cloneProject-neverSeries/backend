@@ -4,9 +4,9 @@ const Reviews = require('../../models/reviews');
 // 댓글 작성
 const createReview = async (req, res) => {
   try {
-    console.log(req.params);
-    console.log(req.body);
-    console.log(res.locals);
+    // console.log(req.params);
+    // console.log(req.body);
+    // console.log(res.locals);
     const { productId } = req.params
     const { review, createdAt, } = req.body;
     const { user_id, nickname } = res.locals;
@@ -14,10 +14,10 @@ const createReview = async (req, res) => {
     //만약 같이 넘겨줄수 없다면 users db에서 직접 검색해서 username 사용
     // const tmpUserId = 12;
 
-    const tmpCreatedAt = new Date();//임시, 원래는 프론트에서 넘겨주어야 함
+    //const tmpCreatedAt = new Date();//임시, 원래는 프론트에서 넘겨주어야 함
 
     const product = await Reviews.create({
-      productId, user_id, nickname, review, createdAt: tmpCreatedAt
+      productId, user_id, nickname, review, createdAt
     });
     console.log(product);
 

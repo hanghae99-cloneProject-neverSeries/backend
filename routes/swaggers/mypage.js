@@ -19,24 +19,22 @@
  *                  items:
  *                    type: object
  *                    properties:
+ *                      id:
+ *                        type: integer
  *                      title:
  *                        type: string
  *                      description:
  *                        type: string
  *                      bookInfo:
  *                        type: string
- *                      round:
- *                        type: integer
- *                      like:
- *                        type: array
- *                      userId:
- *                        type: integer
  *                      imgURL:
  *                        type: string
+ *                      star:
+ *                        type: float
  *              example:
  *                products: [
- *                  {title: 화산 귀환, description: 13대 화산제자 청명, bookInfo: 출판내용, round: 1, like: [], userID: 1, imgURL: 이미지 사진},
- *                  {title: 마도전생기, description: 마도가 전생, bookInfo: 출판내용, round: 1, like: [], userID: 1, imgURL: 이미지 사진}
+ *                  {id: 1, title: 화산 귀환, description: 13대 화산제자 청명, bookInfo: 출판내용, imgURL: 이미지 사진, star: 9.5},
+ *                  {id: 2, title: 마도전생기, description: 마도가 전생, bookInfo: 출판내용, imgURL: 이미지 사진, star: 8.9}
  *                ]
  */
 

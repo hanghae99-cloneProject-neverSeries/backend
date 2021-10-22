@@ -3,6 +3,7 @@ const Reviews = require('../../models/reviews');
 const Likes = require('../../models/likes');
 const Rounds = require('../../models/rounds');
 const { Sequelize, } = require('sequelize');
+const BuyProduct = require('../../models/buyproducts');
 
 
 // Todo ---> Like : [좋아요 갯수(length), status(본인이 좋아요 유무)]
@@ -36,7 +37,6 @@ const getProduct = async (req, res) => {
           attributes: [],
         },
       ],
-      raw: true
     });
     console.log(product);
 
@@ -51,7 +51,12 @@ const getProduct = async (req, res) => {
       where: { productId: productId },
       raw: true
     })
-    res.send({ product, myLike, myMuffin, reviews });
+
+    const buyproduct = await BuyProduct.findAll({
+      where: { user_id: user_id, productId: productId },  // Todo --> 추가된 부분 해당 도서의 구매목록만 보내주어야함. (productId)
+    });
+    console.log(buyproduct);
+    res.send({ product, myLike, myMuffin, reviews, buyproduct });
   }
   catch (error) {
     console.log(error);
@@ -62,12 +67,11 @@ const getProduct = async (req, res) => {
 //product 추가(임시 테스트 데이터 추가용)
 const createProduct = async (req, res) => {
   try {
-    console.log(1);
     console.log(req.body);
-    const { title, description, bookInfo, round, imgURL } = req.body;
+    const { title, description, bookInfo, round, imgURL, star } = req.body;
 
     const product = await Products.create({
-      title, description, bookInfo, round, imgURL
+      title, description, bookInfo, round, imgURL, star,
     });
 
     const productId = product.id;
