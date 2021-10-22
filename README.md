@@ -34,6 +34,11 @@
   - `관계형 DB를 사용함으로 데이터 처리(분류, 탐색, 정렬) 및 무결성을 확보하기 위함`
 - **Express**
 
+
+<h2>:clipboard:ER 다이어그램:clipboard:</h2>
+<img width="720" alt="ER 다이어그램" src="https://user-images.githubusercontent.com/84619866/138456777-9bfadb32-30e8-40ca-981a-f1d989dc476f.png">
+
+
 <h2>📝라이브러리📝</h2>
 
 - **React**
