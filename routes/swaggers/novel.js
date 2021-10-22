@@ -108,12 +108,15 @@
  *              imgURL:
  *                type: string
  *                required: true
+ *              star:
+ *                type: float
  *            example:
  *              title: 화산 귀환
  *              description: 대 화산화 13대 제자, 천하삼대검수, 매화검존..
  *              bookInfo: 무협 비가 러프미디어 전체이용가
  *              round: 5
  *              imgURL: https://series.naver.com/novel/detail.series?productNo=4130558#
+ *              star: 8.3
  *    responses:
  *      200:
  *        description: 정상적인 요청, 응답
